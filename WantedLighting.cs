@@ -16,21 +16,7 @@ namespace CorsairGTA
         {
             return "Wanted";
         }
-
-        GradientStop[] first =
-        {
-            new GradientStop(0f, Color.Blue),
-            new GradientStop(1f, Color.Red)
-        };
-
-        GradientStop[] second =
-        {
-            new GradientStop(1f, Color.Blue),
-            new GradientStop(0f, Color.Red)
-        };
-
-        int TickNum = 0;
-
+        
         public WantedLighting()
         {
             Tick += WantedLighting_Tick;
@@ -38,22 +24,43 @@ namespace CorsairGTA
 
         private void WantedLighting_Tick(CorsairKeyboard keyboard)
         {
+            UsedBrushes.Clear();
             if (Game.Player.WantedLevel > 0 && !Game.Player.Character.IsInjured)
             {
                 isActive = true;
-                TickNum++;
 
-                if (TickNum > 120) TickNum = 0;
+                //if (TickNum > 120) TickNum = 0;
 
-                GradientStop[] gradient;
-                if (TickNum > 60) gradient = second;
-                else gradient = first;
+                int modifier = 50;
+
+                float pos = (float)TickNum / (float)modifier;
+
+                if (pos == 0.0f) pos = 0.01f;
+
+                if (TickNum > modifier)
+                {
+                    pos = 2f + (pos * -1);
+                }
+
+
+                if (TickNum >= (modifier * 2))
+                {
+                    TickNum = 0;
+                }
+
+                GradientStop[] gradient =
+                {
+                    new GradientStop(0f, Color.Red),
+                    new GradientStop(pos, Color.Blue),
+                    new GradientStop(1f, Color.Red)
+                };
 
                 LinearGradient blueToRedGradient = new LinearGradient(gradient);
                 PointF startPoint = new PointF(0f, 0f);
                 PointF endPoint = new PointF(1f, 0f);
                 LinearGradientBrush linearBrush = new LinearGradientBrush(startPoint, endPoint, blueToRedGradient);
                 keyboard.Brush = linearBrush;
+                UsedBrushes.Add(keyboard.Brush);
             }
             else
             {
@@ -61,7 +68,6 @@ namespace CorsairGTA
                 {
                     isActive = false;
                     CorsairGTA.ClearKeyboard(keyboard);
-                    TickNum = 0;
                 }
             }
         }

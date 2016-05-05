@@ -18,6 +18,8 @@ namespace CorsairGTA
             Lightings.Add(new WantedLighting());
             Lightings.Add(new PlayerLighting());
             Lightings.Add(new WastedLighting());
+            //Lightings.Add(new PlayerRunningLighting());
+            Lightings.Add(new MoneyLighting());
         }
 
         public static void Tick()

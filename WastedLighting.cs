@@ -20,16 +20,14 @@ namespace CorsairGTA
             Tick += HealthLighting_Tick;
         }
 
-        int TickNum = 0;
-
         private void HealthLighting_Tick(CorsairKeyboard keyboard)
         {
+            UsedBrushes.Clear();
             //debugText.Draw();
 
-            if(Game.Player.Character.IsInjured) 
+            if (Game.Player.Character.IsInjured) 
             {
                 isActive = true;
-                TickNum++;
 
                 var brush = new SolidColorBrush(Color.Red);
 
@@ -52,14 +50,13 @@ namespace CorsairGTA
                 //debugText.Caption = "brightness: " + Convert.ToString(brush.Brightness) + " tick: " + TickNum;
 
                 keyboard.Brush = brush;
-                
+                UsedBrushes.Add(keyboard.Brush);
 
             }
             else
             {
                 if(isActive)
                 {
-                    TickNum = 0;
                     isActive = false;
                     CorsairGTA.ClearKeyboard(keyboard);
                 }

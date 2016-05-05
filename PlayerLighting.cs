@@ -33,7 +33,7 @@ namespace CorsairGTA
         
         private void PlayerLighting_Tick(CorsairKeyboard keyboard)
         {
-            
+            UsedBrushes.Clear();
 
             //todo only check every 30 ticks to save perf?
             bool imTheOnlyActiveLighting = true;
@@ -70,8 +70,9 @@ namespace CorsairGTA
                 //if (color == Color.Black) return;
 
                 SolidColorBrush playerBrush = new SolidColorBrush(color);
-                playerBrush.Brightness = 0.6f;
+                //playerBrush.Brightness = 0.6f;
                 keyboard.Brush = playerBrush;
+                UsedBrushes.Add(keyboard.Brush);
             }
             else
             {
