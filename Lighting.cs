@@ -21,13 +21,32 @@ namespace CorsairGTA
         bool FadeInRunning = false;
         bool FadeOutRunning = false;
 
+        public bool Enabled = true;
+
         public int TickNum = 0;
         public int FadeTickNum = 0;
 
+        public void Disable()
+        {
+            Enabled = false;
+            isActive = false;
+        }
+
+        public void Enable()
+        {
+            Enabled = true;
+        }
+
         public void DoTick(CorsairKeyboard keyboard)
         {
-            TickNum++;
+            if (!Enabled)
+            {
+                CorsairGTA.ClearKeyboard(keyboard);
+                return;
+            }
 
+            TickNum++;
+            
             var wasActive = isActive;
 
             Tick(keyboard);

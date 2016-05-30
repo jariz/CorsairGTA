@@ -17,8 +17,7 @@ namespace CorsairGTA
         {
             Tick += PlayerRunningLighting_Tick;
         }
-
-        int TickNum = 0;
+        
 
         UIText debugText = new UIText("INIT!!!!!", new Point(10, 10), 0.4f, Color.WhiteSmoke, 0, false);
 

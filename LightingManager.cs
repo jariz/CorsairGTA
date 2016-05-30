@@ -20,6 +20,8 @@ namespace CorsairGTA
             Lightings.Add(new WastedLighting());
             //Lightings.Add(new PlayerRunningLighting());
             Lightings.Add(new MoneyLighting());
+            //Lightings.Add(new CarLighting());
+            Lightings.Add(new HealthLighting());
         }
 
         public static void Tick()
@@ -38,6 +40,11 @@ namespace CorsairGTA
         public static IEnumerable<Lighting> GetInactiveLightings()
         {
             return Lightings.Where(l => !l.isActive);
+        }
+
+        public static IEnumerable<Lighting> GetLightings()
+        {
+            return Lightings;
         }
     }
 }

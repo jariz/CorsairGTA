@@ -68,9 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarLighting.cs" />
     <Compile Include="CorsairGTA.cs" />
+    <Compile Include="HealthLighting.cs" />
     <Compile Include="MoneyLighting.cs" />
     <Compile Include="PlayerRunningLighting.cs" />
+    <Compile Include="UIManager.cs" />
     <Compile Include="WastedLighting.cs" />
     <Compile Include="Lighting.cs" />
     <Compile Include="LightingManager.cs" />

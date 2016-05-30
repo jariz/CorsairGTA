@@ -51,6 +51,9 @@ namespace CorsairGTA
                     //load lightings
                     LightingManager.Load(keyboard);
 
+                    //load UI
+                    UIManager.Init();
+
                     UI.Notify("CorsairGTA successfully initialized (" + CueSDK.LoadedArchitecture + "-SDK)", true);
                 }
                 catch (CUEException ex)
@@ -71,13 +74,13 @@ namespace CorsairGTA
                     UI.Notify(ex.Message);
                     return;
                 }
-
-
+                
                 //reset keyboard on init..
                 ClearKeyboard(keyboard);
             }
 
             LightingManager.Tick();
+            UIManager.Tick();
         }
     }
 }
