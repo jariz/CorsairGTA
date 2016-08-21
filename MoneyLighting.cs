@@ -13,6 +13,12 @@ namespace CorsairGTA
             return "Money";
         }
 
+
+        public override string Description()
+        {
+            return "Indicates a increase in player money\nwith a green flash on the keyboard.";
+        }
+
         public MoneyLighting()
         {
             Tick += MoneyLighting_Tick;

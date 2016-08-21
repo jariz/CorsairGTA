@@ -3,16 +3,9 @@ using System;
 using CUE.NET;
 using CUE.NET.Exceptions;
 using CUE.NET.Devices.Keyboard;
-using System.Diagnostics;
 using CUE.NET.Devices.Generic.Enums;
 using System.Drawing;
-using CUE.NET.Devices.Keyboard.Enums;
-using CUE.NET.Gradients;
 using CUE.NET.Brushes;
-using CUE.NET.Devices.Keyboard.Keys;
-using System.Collections;
-using CUE.NET.Devices.Generic;
-using System.Collections.Generic;
 
 namespace CorsairGTA
 {
@@ -26,6 +19,11 @@ namespace CorsairGTA
         public static void ClearKeyboard(CorsairKeyboard keyboard)
         {
             keyboard.Brush = new SolidColorBrush(Color.Black);
+        }
+
+        public static Color MakeTransparent(Color color)
+        {
+            return Color.FromArgb(210, color.R, color.G, color.B);
         }
 
         bool isInitialized = false;
@@ -54,24 +52,40 @@ namespace CorsairGTA
                     //load UI
                     UIManager.Init();
 
-                    UI.Notify("CorsairGTA successfully initialized (" + CueSDK.LoadedArchitecture + "-SDK)", true);
+                    //UI.Notify("CorsairGTA successfully initialized (" + CueSDK.LoadedArchitecture + "-SDK)", true);
+                    Log.Write("CorsairGTA successfully initialized (" + CueSDK.LoadedArchitecture + "-SDK)");
                 }
                 catch (CUEException ex)
                 {
                     UI.Notify("CorsairGTA failed to initialize. (CUE Error)");
                     UI.Notify("CUE error code: " + Enum.GetName(typeof(CorsairError), ex.Error));
+
+                    Log.Write("CorsairGTA failed to initialize. (CUE Error)");
+                    Log.Write("CUE error code: " + Enum.GetName(typeof(CorsairError), ex.Error));
+                    Log.Write("Full stack:");
+                    Log.Write(ex.ToString());
                     return;
                 }
                 catch (WrapperException ex)
                 {
                     UI.Notify("CorsairGTA failed to initialize. (Wrapper Error)");
                     UI.Notify(ex.Message);
+
+                    Log.Write("CorsairGTA failed to initialize. (Wrapper Error)");
+                    Log.Write(ex.Message);
+                    Log.Write("Full stack:");
+                    Log.Write(ex.ToString());
                     return;
                 }
                 catch (Exception ex)
                 {
                     UI.Notify("CorsairGTA failed to initialize. (Unknown Error)");
                     UI.Notify(ex.Message);
+
+                    Log.Write("CorsairGTA failed to initialize. (Unknown Error)");
+                    Log.Write(ex.Message);
+                    Log.Write("Full stack:");
+                    Log.Write(ex.ToString());
                     return;
                 }
                 

@@ -13,6 +13,11 @@ namespace CorsairGTA
             return "Wasted";
         }
 
+        public override string Description()
+        {
+            return "Indicates when you are 'wasted', aka\ndeath with a flashing red color on\nyour keyboard.";
+        }
+
         //UIText debugText = new UIText("INIT!!!!!", new Point(10, 10), 0.4f, Color.WhiteSmoke, 0, false);
 
         public WastedLighting()

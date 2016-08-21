@@ -23,7 +23,12 @@ namespace CorsairGTA
     {
         public override string Name()
         {
-            return "Player";
+            return "Player  ";
+        }
+
+        public override string Description()
+        {
+            return "Default lighting that shows the color of\nthe character you're playing with when\nno other lightings are applicable.";
         }
 
         public PlayerLighting()

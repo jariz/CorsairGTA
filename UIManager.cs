@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using GTA;
 
 namespace CorsairGTA
@@ -36,22 +34,26 @@ namespace CorsairGTA
                     }
                     button.Caption = lighting.Name() + " lighting\t\t[" + (lighting.Enabled ? "ON" : "OFF") + "]";
                 };
+                button.Description = lighting.Description();
                 items.Add(button);
             }
 
 
             menu = new Menu("CorsairGTA", items.ToArray());
-            //menu.SelectedItemColor = System.Drawing.Color.Red;
-            //menu.UnselectedItemColor = System.Drawing.Color.DarkRed;
-           
-            menu.HeaderFont = Font.ChaletComprimeCologne;
+
+
+            menu.Width = 310;
             menu.ItemTextCentered = false;
-            menu.HasFooter = false;
 
-            menu.Width = 210;
-
-            menu.HeaderColor = System.Drawing.Color.Red;
+            menu.HeaderFont = GTA.Font.ChaletComprimeCologne;
+            menu.HeaderColor = CorsairGTA.MakeTransparent(ColorTranslator.FromHtml("#2ECC71"));
             menu.HeaderTextScale = 0.67f;
+
+            menu.SelectedItemColor = CorsairGTA.MakeTransparent(ColorTranslator.FromHtml("#90C695"));
+            menu.UnselectedItemColor = CorsairGTA.MakeTransparent(ColorTranslator.FromHtml("#b7CCB9"));
+
+            menu.FooterColor = CorsairGTA.MakeTransparent(ColorTranslator.FromHtml("#94d09a"));
+
             menu.Initialize();
         }
 
@@ -71,80 +73,77 @@ namespace CorsairGTA
                 f3AlreadyPressed = false;
             }
 
-            if(Game.IsKeyPressed(System.Windows.Forms.Keys.NumPad2))
+            if (showMenu)
             {
-                if(numpad2Tick == 0)
+                if (Game.IsKeyPressed(System.Windows.Forms.Keys.NumPad2))
                 {
-                    if (menu.SelectedIndex < menu.Items.Count - 1)
+                    if (numpad2Tick == 0)
                     {
-                        menu.SelectedIndex += 1;
+                        if (menu.SelectedIndex < menu.Items.Count - 1)
+                        {
+                            menu.SelectedIndex += 1;
+                        }
+                        else
+                        {
+                            menu.SelectedIndex = 0;
+                        }
                     }
-                    else
+
+                    numpad2Tick += 1;
+
+                    if (numpad2Tick > 10)
                     {
-                        menu.SelectedIndex = 0;
+                        numpad2Tick = 0;
                     }
                 }
-
-                numpad2Tick += 1;
-
-                if (numpad2Tick > 10)
+                else
                 {
                     numpad2Tick = 0;
                 }
-            }
-            else
-            {
-                numpad2Tick = 0;
-            }
 
-            if (Game.IsKeyPressed(System.Windows.Forms.Keys.NumPad8))
-            {
-                if (numpad8Tick == 0)
+                if (Game.IsKeyPressed(System.Windows.Forms.Keys.NumPad8))
                 {
-                    if (menu.SelectedIndex > 0)
+                    if (numpad8Tick == 0)
                     {
-                        menu.SelectedIndex -= 1;
+                        if (menu.SelectedIndex > 0)
+                        {
+                            menu.SelectedIndex -= 1;
+                        }
+                        else
+                        {
+                            menu.SelectedIndex = menu.Items.Count - 1;
+                        }
                     }
-                    else
+
+                    numpad8Tick += 1;
+
+                    if (numpad8Tick > 10)
                     {
-                        menu.SelectedIndex = menu.Items.Count - 1;
+                        numpad8Tick = 0;
                     }
                 }
-
-                numpad8Tick += 1;
-
-                if (numpad8Tick > 10)
+                else
                 {
                     numpad8Tick = 0;
                 }
-            }
-            else
-            {
-                numpad8Tick = 0;
-            }
 
-            if(Game.IsKeyPressed(System.Windows.Forms.Keys.NumPad5))
-            {
-                if(!numpad5AlreadyPressed)
+                if (Game.IsKeyPressed(System.Windows.Forms.Keys.NumPad5))
                 {
-                    menu.Items[menu.SelectedIndex].Activate();
+                    if (!numpad5AlreadyPressed)
+                    {
+                        menu.Items[menu.SelectedIndex].Activate();
+                    }
+
+                    numpad5AlreadyPressed = true;
+                }
+                else
+                {
+                    numpad5AlreadyPressed = false;
                 }
 
-                numpad5AlreadyPressed = true;
-            }
-            else
-            {
-                numpad5AlreadyPressed = false;
-            }
-
-            if (showMenu)
-            {
-                var size = new System.Drawing.Size(new System.Drawing.Point(20, 20));
+                var size = new System.Drawing.Size(new System.Drawing.Point(10, 10));
                 menu.Draw(size);
             }
-            
         }
-
-
     }
 }

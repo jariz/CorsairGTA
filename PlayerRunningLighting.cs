@@ -12,6 +12,11 @@ namespace CorsairGTA
         {
             return "PlayerRunning";
         }
+        
+        public override string Description()
+        {
+            return "???";
+        }
 
         public PlayerRunningLighting()
         {

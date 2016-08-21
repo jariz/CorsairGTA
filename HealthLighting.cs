@@ -15,6 +15,11 @@ namespace CorsairGTA
             return "Health";
         }
 
+        public override string Description()
+        {
+            return "Indicates HP drops with a little heart on\nthe keyboard.";
+        }
+
         public HealthLighting()
         {
             Tick += HealthLighting_Tick;
@@ -24,8 +29,12 @@ namespace CorsairGTA
         int lastHealth = -1;
         int healthTickNum = 0;
 
+        ListKeyGroup group;
+
         private void HealthLighting_Tick(CorsairKeyboard keyboard)
         {
+            UsedBrushes.Clear();
+
             if (lastHealth == -1) lastHealth = Game.Player.Character.Health;
 
             if (Game.Player.Character.Health < lastHealth)
@@ -39,35 +48,42 @@ namespace CorsairGTA
             if (isActive)
             {
                 healthTickNum++;
-                ListKeyGroup group = new ListKeyGroup(keyboard);
 
-                group.AddKey(new CorsairKey[] {
-                    keyboard[CorsairKeyboardKeyId.D7],
-                    keyboard[CorsairKeyboardKeyId.D0],
+                //if(group == null)
+                //{
+                    group = new ListKeyGroup(keyboard);
 
-                    keyboard['Y'],
-                    keyboard['U'],
-                    keyboard['O'],
-                    keyboard['I'],
-                    keyboard['P'],
+                    group.AddKey(new CorsairKey[] {
+                        keyboard[CorsairKeyboardKeyId.D7],
+                        keyboard[CorsairKeyboardKeyId.D0],
 
-                    keyboard['H'],
-                    keyboard['J'],
-                    keyboard['K'],
-                    keyboard['L'],
+                        keyboard['Y'],
+                        keyboard['U'],
+                        keyboard['O'],
+                        keyboard['I'],
+                        keyboard['P'],
 
-                    keyboard['N'],
-                    keyboard['M'],
-                    keyboard[CorsairKeyboardKeyId.CommaAndLessThan]
-                });
+                        keyboard['H'],
+                        keyboard['J'],
+                        keyboard['K'],
+                        keyboard['L'],
+
+                        keyboard['N'],
+                        keyboard['M'],
+                        keyboard[CorsairKeyboardKeyId.CommaAndLessThan]
+                    });
+
+                    group.Brush = new SolidColorBrush(Color.Red);
+                    UsedBrushes.Add(group.Brush);
+                //}
                 
-                group.Brush = new SolidColorBrush(Color.Red);
-                UsedBrushes.Add(group.Brush);
             }
 
             if (healthTickNum > 100)
             {
                 isActive = false;
+                //group.Brush = new SolidColorBrush(Color.Black);
+                group.RemoveKeys(group.Keys);
             }
         }
     }

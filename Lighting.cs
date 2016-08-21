@@ -12,16 +12,51 @@ namespace CorsairGTA
     public delegate void LightingHandler(CorsairKeyboard keyboard);
     abstract class Lighting
     {
+        public Lighting()
+        {
+            Log.Write($"Lighting {this.Name()} loaded.");
+        }
+
         public abstract string Name();
+        public abstract string Description();
+
         public List<IBrush> UsedBrushes = new List<IBrush>();
 
         public event LightingHandler Tick;
-        public bool isActive = false;
+
+
+        public bool _isActive = false;
+        public bool isActive
+        {
+            get
+            {
+                return _isActive;
+            }
+            set
+            {
+                if(_isActive != value)
+                    Log.Write($"Lighting {this.Name()} " + (value ? "became active" : "became inactive"));
+                _isActive = value;
+            }
+        }
 
         bool FadeInRunning = false;
         bool FadeOutRunning = false;
 
-        public bool Enabled = true;
+        public bool _enabled = true;
+        public bool Enabled
+        {
+            get
+            {
+                return _enabled;
+            }
+            set
+            {
+                if(_enabled != value)
+                    Log.Write($"Lighting {this.Name()} " + (value ? "enabled" : "disabled"));
+                _enabled = value;
+            }
+        }
 
         public int TickNum = 0;
         public int FadeTickNum = 0;
@@ -55,11 +90,15 @@ namespace CorsairGTA
             {
                 FadeTickNum = 0;
                 FadeInRunning = true;
+
+                Log.Write($"Starting fadein for {this.Name()} w/{UsedBrushes.Count} brushes");
             }
             if (!isActive && wasActive)
             {
                 FadeTickNum = 0;
                 FadeOutRunning = true;
+
+                Log.Write($"Starting fadeout for {this.Name()} w/{UsedBrushes.Count} brushes");
             }
 
 

@@ -22,6 +22,8 @@ namespace CorsairGTA
             Lightings.Add(new MoneyLighting());
             //Lightings.Add(new CarLighting());
             Lightings.Add(new HealthLighting());
+            Lightings.Add(new UnderwaterLighting());
+            Lightings.Add(new FireLighting());
         }
 
         public static void Tick()

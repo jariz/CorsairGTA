@@ -1,36 +1,32 @@
-﻿/**
- * Sirens!!!
-**/
-
+﻿using GTA;
 using CUE.NET.Devices.Keyboard;
-using GTA;
 using CUE.NET.Gradients;
 using System.Drawing;
 using CUE.NET.Brushes;
 
 namespace CorsairGTA
 {
-    class WantedLighting : Lighting
+    class UnderwaterLighting : Lighting
     {
         public override string Name()
         {
-            return "Wanted";
+            return "Water";
         }
 
         public override string Description()
         {
-            return "Indicates whether or not you are wanted\nwith a animation of a siren on your\nkeyboard.";
+            return "Indicates when you're underwater or not\nwith a nice ocean animation on your\nkeyboard.";
         }
 
-        public WantedLighting()
+        public UnderwaterLighting()
         {
-            Tick += WantedLighting_Tick;
+            Tick += UnderwaterLighting_Tick;
         }
 
-        private void WantedLighting_Tick(CorsairKeyboard keyboard)
+        private void UnderwaterLighting_Tick(CorsairKeyboard keyboard)
         {
             UsedBrushes.Clear();
-            if (Game.Player.WantedLevel > 0 && !Game.Player.Character.IsInjured)
+            if(Game.Player.Character.IsSwimmingUnderWater)
             {
                 isActive = true;
 
@@ -53,27 +49,26 @@ namespace CorsairGTA
 
                 GradientStop[] gradient =
                 {
-                    new GradientStop(0f, Color.Red),
-                    new GradientStop(pos, Color.Blue),
-                    new GradientStop(1f, Color.Red)
+                    new GradientStop(0f, Color.Blue),
+                    new GradientStop(pos, Color.Cyan),
+                    new GradientStop(1f, Color.Blue)
                 };
 
-                LinearGradient blueToRedGradient = new LinearGradient(gradient);
+                LinearGradient blueToCyanGradient = new LinearGradient(gradient);
                 PointF startPoint = new PointF(0f, 0f);
                 PointF endPoint = new PointF(1f, 0f);
-                LinearGradientBrush linearBrush = new LinearGradientBrush(startPoint, endPoint, blueToRedGradient);
+                LinearGradientBrush linearBrush = new LinearGradientBrush(startPoint, endPoint, blueToCyanGradient);
                 keyboard.Brush = linearBrush;
                 UsedBrushes.Add(keyboard.Brush);
             }
             else
             {
-                if(isActive)
+                if (isActive)
                 {
                     isActive = false;
                     CorsairGTA.ClearKeyboard(keyboard);
                 }
             }
         }
-
     }
 }

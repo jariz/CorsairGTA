@@ -14,6 +14,11 @@ namespace CorsairGTA
             return "Car";
         }
 
+        public override string Description()
+        {
+            return "???";
+        }
+
         public CarLighting()
         {
             Tick += CarLighting_Tick;
