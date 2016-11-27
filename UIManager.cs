@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using GTA;
+using System.Windows.Forms;
 
 namespace CorsairGTA
 {
     static class UIManager
     {
-        static Menu menu;
+        static GTA.Menu menu;
 
         static bool f3AlreadyPressed = false;
         static bool numpad5AlreadyPressed = false;
@@ -39,7 +40,7 @@ namespace CorsairGTA
             }
 
 
-            menu = new Menu("CorsairGTA", items.ToArray());
+            menu = new GTA.Menu("CorsairGTA", items.ToArray());
 
 
             menu.Width = 310;
@@ -59,7 +60,7 @@ namespace CorsairGTA
 
         public static void Tick()
         {
-            if(Game.IsKeyPressed(System.Windows.Forms.Keys.F3))
+            if(Game.IsKeyPressed(Keys.F3))
             {
                 if(!f3AlreadyPressed)
                 {
@@ -75,7 +76,7 @@ namespace CorsairGTA
 
             if (showMenu)
             {
-                if (Game.IsKeyPressed(System.Windows.Forms.Keys.NumPad2))
+                if (Game.IsKeyPressed(Keys.NumPad2))
                 {
                     if (numpad2Tick == 0)
                     {
@@ -101,7 +102,7 @@ namespace CorsairGTA
                     numpad2Tick = 0;
                 }
 
-                if (Game.IsKeyPressed(System.Windows.Forms.Keys.NumPad8))
+                if (Game.IsKeyPressed(Keys.NumPad8))
                 {
                     if (numpad8Tick == 0)
                     {
@@ -127,7 +128,7 @@ namespace CorsairGTA
                     numpad8Tick = 0;
                 }
 
-                if (Game.IsKeyPressed(System.Windows.Forms.Keys.NumPad5))
+                if (Game.IsKeyPressed(Keys.NumPad5))
                 {
                     if (!numpad5AlreadyPressed)
                     {
@@ -141,7 +142,7 @@ namespace CorsairGTA
                     numpad5AlreadyPressed = false;
                 }
 
-                var size = new System.Drawing.Size(new System.Drawing.Point(10, 10));
+                var size = new Size(new Point(10, 10));
                 menu.Draw(size);
             }
         }

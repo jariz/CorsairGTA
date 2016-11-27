@@ -68,21 +68,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarLighting.cs" />
+    <Compile Include="Lightings\CarLighting.cs" />
     <Compile Include="CorsairGTA.cs" />
-    <Compile Include="FireLighting.cs" />
-    <Compile Include="HealthLighting.cs" />
+    <Compile Include="Lightings\FireLighting.cs" />
+    <Compile Include="Lightings\HealthLighting.cs" />
     <Compile Include="Log.cs" />
-    <Compile Include="MoneyLighting.cs" />
-    <Compile Include="PlayerRunningLighting.cs" />
+    <Compile Include="Lightings\MoneyLighting.cs" />
+    <Compile Include="Lightings\PlayerRunningLighting.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="UIManager.cs" />
-    <Compile Include="WaterLighting.cs" />
-    <Compile Include="WastedLighting.cs" />
+    <Compile Include="Lightings\WaterLighting.cs" />
+    <Compile Include="Lightings\WastedLighting.cs" />
     <Compile Include="Lighting.cs" />
     <Compile Include="LightingManager.cs" />
-    <Compile Include="PlayerLighting.cs" />
+    <Compile Include="Lightings\PlayerLighting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WantedLighting.cs" />
+    <Compile Include="Lightings\WantedLighting.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

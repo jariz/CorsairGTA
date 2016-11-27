@@ -18,7 +18,7 @@ namespace CorsairGTA
 
         public static void ClearKeyboard(CorsairKeyboard keyboard)
         {
-            keyboard.Brush = new SolidColorBrush(Color.Black);
+            //keyboard.Brush = new SolidColorBrush(Color.Black);
         }
 
         public static Color MakeTransparent(Color color)
@@ -52,7 +52,7 @@ namespace CorsairGTA
                     //load UI
                     UIManager.Init();
 
-                    //UI.Notify("CorsairGTA successfully initialized (" + CueSDK.LoadedArchitecture + "-SDK)", true);
+                    UI.Notify("CorsairGTA successfully initialized (" + CueSDK.LoadedArchitecture + "-SDK)", true);
                     Log.Write("CorsairGTA successfully initialized (" + CueSDK.LoadedArchitecture + "-SDK)");
                 }
                 catch (CUEException ex)

@@ -1,6 +1,7 @@
 ﻿using CUE.NET.Brushes;
 using CUE.NET.Devices.Keyboard;
 using GTA;
+using System.Collections.Generic;
 
 namespace CorsairGTA
 {
@@ -45,6 +46,7 @@ namespace CorsairGTA
                     TickNum = 0;
                 }
                 keyboard.Brush = brush;
+                UsedBrushes = new List<IBrush>();
                 UsedBrushes.Add(keyboard.Brush);
             }
             else

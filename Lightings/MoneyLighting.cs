@@ -3,6 +3,7 @@ using GTA;
 using CUE.NET.Devices.Keyboard;
 using CUE.NET.Brushes;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace CorsairGTA
 {
@@ -29,8 +30,6 @@ namespace CorsairGTA
 
         private void MoneyLighting_Tick(CorsairKeyboard keyboard)
         {
-            UsedBrushes.Clear();
-
             if (lastMoney == -1) lastMoney = Game.Player.Money;
 
             if(Game.Player.Money > lastMoney)
@@ -45,6 +44,7 @@ namespace CorsairGTA
             {
                 moneyTickNum++;
                 keyboard.Brush = new SolidColorBrush(Color.Green);
+                UsedBrushes = new List<IBrush>();
                 UsedBrushes.Add(keyboard.Brush);
             }
 

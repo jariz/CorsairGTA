@@ -9,6 +9,11 @@ namespace CorsairGTA
     {
         static StreamWriter writer;
         static bool firstWrite = false;
+
+        public Log()
+        {
+           // Open();
+        }
         
         public static void Open()
         {
@@ -16,6 +21,7 @@ namespace CorsairGTA
             var filename = $"CorsairGTA-{dt.Year}-{dt.Day.ToString("D2")}-{dt.Month.ToString("D2")}.log";
             var stream = File.Open(filename, FileMode.Append);
             writer = new StreamWriter(stream);
+            writer.AutoFlush = true;
         }
 
         public static void Close()

@@ -7,6 +7,7 @@ using GTA;
 using CUE.NET.Gradients;
 using System.Drawing;
 using CUE.NET.Brushes;
+using System.Collections.Generic;
 
 namespace CorsairGTA
 {
@@ -29,7 +30,6 @@ namespace CorsairGTA
 
         private void WantedLighting_Tick(CorsairKeyboard keyboard)
         {
-            UsedBrushes.Clear();
             if (Game.Player.WantedLevel > 0 && !Game.Player.Character.IsInjured)
             {
                 isActive = true;
@@ -63,6 +63,7 @@ namespace CorsairGTA
                 PointF endPoint = new PointF(1f, 0f);
                 LinearGradientBrush linearBrush = new LinearGradientBrush(startPoint, endPoint, blueToRedGradient);
                 keyboard.Brush = linearBrush;
+                UsedBrushes = new List<IBrush>();
                 UsedBrushes.Add(keyboard.Brush);
             }
             else

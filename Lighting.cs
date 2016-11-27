@@ -20,6 +20,11 @@ namespace CorsairGTA
         public abstract string Name();
         public abstract string Description();
 
+        public virtual void updateBrush(IBrush brush, CorsairKeyboard keyboard)
+        {
+
+        }
+
         public List<IBrush> UsedBrushes = new List<IBrush>();
 
         public event LightingHandler Tick;
@@ -119,6 +124,8 @@ namespace CorsairGTA
                 FadeOutRunning = false;
                 FadeTickNum = 0;
             }
+
+            UsedBrushes.ForEach(brush => updateBrush(brush, keyboard));
         }
     }
 }

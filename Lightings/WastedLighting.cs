@@ -2,7 +2,7 @@
 using GTA;
 using System.Drawing;
 using CUE.NET.Brushes;
-using System;
+using System.Collections.Generic;
 
 namespace CorsairGTA
 {
@@ -19,7 +19,7 @@ namespace CorsairGTA
         }
 
         //UIText debugText = new UIText("INIT!!!!!", new Point(10, 10), 0.4f, Color.WhiteSmoke, 0, false);
-
+        
         public WastedLighting()
         {
             Tick += HealthLighting_Tick;
@@ -27,7 +27,6 @@ namespace CorsairGTA
 
         private void HealthLighting_Tick(CorsairKeyboard keyboard)
         {
-            UsedBrushes.Clear();
             //debugText.Draw();
 
             if (Game.Player.Character.IsInjured) 
@@ -55,8 +54,8 @@ namespace CorsairGTA
                 //debugText.Caption = "brightness: " + Convert.ToString(brush.Brightness) + " tick: " + TickNum;
 
                 keyboard.Brush = brush;
+                UsedBrushes = new List<IBrush>();
                 UsedBrushes.Add(keyboard.Brush);
-
             }
             else
             {

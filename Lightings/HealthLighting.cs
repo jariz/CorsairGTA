@@ -5,6 +5,7 @@ using CUE.NET.Brushes;
 using System.Drawing;
 using CUE.NET.Devices.Keyboard.Keys;
 using CUE.NET.Devices.Keyboard.Enums;
+using System.Collections.Generic;
 
 namespace CorsairGTA
 {
@@ -31,9 +32,15 @@ namespace CorsairGTA
 
         ListKeyGroup group;
 
+        public override void updateBrush(IBrush brush, CorsairKeyboard keyboard)
+        {
+            keyboard.DetachKeyGroup(group);
+            group.Brush = brush;
+            keyboard.AttachKeyGroup(group);
+        }
+
         private void HealthLighting_Tick(CorsairKeyboard keyboard)
         {
-            UsedBrushes.Clear();
 
             if (lastHealth == -1) lastHealth = Game.Player.Character.Health;
 
@@ -49,8 +56,8 @@ namespace CorsairGTA
             {
                 healthTickNum++;
 
-                //if(group == null)
-                //{
+                if(group == null)
+                {
                     group = new ListKeyGroup(keyboard);
 
                     group.AddKey(new CorsairKey[] {
@@ -73,17 +80,19 @@ namespace CorsairGTA
                         keyboard[CorsairKeyboardKeyId.CommaAndLessThan]
                     });
 
+
                     group.Brush = new SolidColorBrush(Color.Red);
+                    UsedBrushes = new List<IBrush>();
                     UsedBrushes.Add(group.Brush);
-                //}
+                }
                 
             }
 
             if (healthTickNum > 100)
             {
                 isActive = false;
-                //group.Brush = new SolidColorBrush(Color.Black);
-                group.RemoveKeys(group.Keys);
+                //keyboard.DetachKeyGroup(group);
+                healthTickNum = 0;
             }
         }
     }
